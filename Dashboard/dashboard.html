@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Doc House Dashboard</title>
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="dashboard.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- ======================================
+         DASHBOARD WRAPPER
+    ======================================= -->
+
+    <div class="dashboard">
+      <!-- ==================================
+             HEADER
+        =================================== -->
+
+      <header class="dashboard-header">
+        <!-- Logo -->
+
+        <div class="logo">
+          <span class="logo-icon">
+            <i class="fa-solid fa-house-medical"></i>
+          </span>
+
+          <span class="logo-text"> Doc House </span>
+        </div>
+
+        <!-- Header Right -->
+
+        <div class="header-right">
+          <!-- Notification -->
+
+          <button class="notification-btn" id="notificationBtn" type="button">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+
+          <!-- Profile -->
+
+          <div class="profile" id="profileBtn">
+            <div class="profile-image">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <span class="profile-name"> Admin </span>
+
+            <i class="fa-solid fa-chevron-down profile-arrow"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==================================
+             DASHBOARD BODY
+        =================================== -->
+
+      <div class="dashboard-body">
+        <!-- =================================
+                 SIDEBAR
+            ================================== -->
+
+        <aside class="sidebar">
+          <div class="sidebar-title">
+            <i class="fa-solid fa-table-columns"></i>
+
+            <span> Dashboard </span>
+          </div>
+
+          <nav class="sidebar-menu">
+            <!-- Dashboard -->
+
+            <a href="#" class="menu-link active" data-page="Dashboard">
+              <i class="fa-solid fa-house"></i>
+
+              <span> Dashboard </span>
+            </a>
+
+            <!-- All Users -->
+
+            <a href="#" class="menu-link" data-page="All Users">
+              <i class="fa-solid fa-users"></i>
+
+              <span> All Users </span>
+            </a>
+
+            <!-- Add Doctor -->
+
+            <a href="#" class="menu-link" data-page="Add a Doctor">
+              <i class="fa-solid fa-user-doctor"></i>
+
+              <span> Add a Doctor </span>
+            </a>
+
+            <!-- Manage Doctor -->
+
+            <a href="#" class="menu-link" data-page="Manage Doctor">
+              <i class="fa-solid fa-user-gear"></i>
+
+              <span> Manage Doctor </span>
+            </a>
+
+            <!-- Home -->
+
+            <a href="../index.html" class="menu-link" data-page="Home">
+              <i class="fa-solid fa-house"></i>
+
+              <span> Home </span>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- =================================
+                 MAIN CONTENT
+            ================================== -->
+
+        <main class="main-content">
+          <!-- Page Heading -->
+
+          <div class="page-heading">
+            <h1>Dashboard</h1>
+
+            <p>Welcome back, Admin</p>
+          </div>
+
+          <!-- =================================
+                     STATISTICS
+                ================================== -->
+
+          <section class="stats-container">
+            <!-- Doctor -->
+
+            <div class="stat-card">
+              <div class="stat-icon doctor-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+
+              <div class="stat-content">
+                <span class="stat-number"> 168 </span>
+
+                <span class="stat-label"> Doctor </span>
+              </div>
+            </div>
+
+            <!-- Patients -->
+
+            <div class="stat-card">
+              <div class="stat-icon patient-icon">
+                <i class="fa-solid fa-users"></i>
+              </div>
+
+              <div class="stat-content">
+                <span class="stat-number"> 487 </span>
+
+                <span class="stat-label"> Patients </span>
+              </div>
+            </div>
+
+            <!-- Appointment -->
+
+            <div class="stat-card">
+              <div class="stat-icon appointment-icon">
+                <i class="fa-regular fa-calendar-check"></i>
+              </div>
+
+              <div class="stat-content">
+                <span class="stat-number"> 95 </span>
+
+                <span class="stat-label"> Appointment </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- =================================
+                     CHART SECTION
+                ================================== -->
+
+          <section class="chart-container">
+            <!-- =================================
+                         PATIENT CHART
+                    ================================== -->
+
+            <div class="chart-card patient-card">
+              <div class="chart-title">
+                <h2>Patient</h2>
+
+                <button class="chart-menu" type="button">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+
+              <div class="line-chart-wrapper">
+                <!-- Y Axis -->
+
+                <div class="y-axis">
+                  <span>120</span>
+                  <span>100</span>
+                  <span>80</span>
+                  <span>60</span>
+                  <span>40</span>
+                  <span>20</span>
+                  <span>0</span>
+                </div>
+
+                <!-- Chart -->
+
+                <div class="line-chart-area">
+                  <div class="horizontal-line line-1"></div>
+
+                  <div class="horizontal-line line-2"></div>
+
+                  <div class="horizontal-line line-3"></div>
+
+                  <div class="horizontal-line line-4"></div>
+
+                  <div class="horizontal-line line-5"></div>
+
+                  <div class="horizontal-line line-6"></div>
+
+                  <svg
+                    class="patient-svg"
+                    viewBox="0 0 600 220"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      class="chart-area-fill"
+                      d="
+                                        M0,170
+                                        C35,165 55,155 80,145
+                                        C105,135 115,160 140,155
+                                        C165,150 180,105 205,110
+                                        C230,115 240,145 270,135
+                                        C300,125 315,105 340,115
+                                        C365,125 375,160 405,155
+                                        C435,150 445,165 470,150
+                                        C500,132 520,125 540,110
+                                        C565,95 585,70 600,55
+                                        L600,220
+                                        L0,220
+                                        Z
+                                        "
+                    ></path>
+
+                    <path
+                      class="chart-line"
+                      d="
+                                        M0,170
+                                        C35,165 55,155 80,145
+                                        C105,135 115,160 140,155
+                                        C165,150 180,105 205,110
+                                        C230,115 240,145 270,135
+                                        C300,125 315,105 340,115
+                                        C365,125 375,160 405,155
+                                        C435,150 445,165 470,150
+                                        C500,132 520,125 540,110
+                                        C565,95 585,70 600,55
+                                        "
+                    ></path>
+                  </svg>
+
+                  <!-- X Axis -->
+
+                  <div class="x-axis">
+                    <span>10</span>
+                    <span>11</span>
+                    <span>12</span>
+                    <span>13</span>
+                    <span>14</span>
+                    <span>15</span>
+                    <span>16</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- =================================
+                         APPOINTMENT CHART
+                    ================================== -->
+
+            <div class="chart-card appointment-card">
+              <div class="chart-title">
+                <h2>Appointment</h2>
+
+                <button class="chart-menu" type="button">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+
+              <div class="appointment-chart">
+                <!-- Pie Chart -->
+
+                <div class="pie-chart"></div>
+
+                <!-- Legend -->
+
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-color doctor-color"></span>
+
+                    <span> Doctor </span>
+                  </div>
+
+                  <div class="legend-item">
+                    <span class="legend-color patient-color"></span>
+
+                    <span> Patient </span>
+                  </div>
+
+                  <div class="legend-item">
+                    <span class="legend-color appointment-color"></span>
+
+                    <span> Appointment </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Dashboard JavaScript -->
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
