@@ -1,215 +1,255 @@
 /* =========================================
-   GET HTML ELEMENTS
+   DOC HOUSE AUTHENTICATION
 ========================================= */
-
-const loginForm = document.getElementById("loginForm");
-
-const emailInput = document.getElementById("email");
-
-const passwordInput = document.getElementById("password");
-
-const emailError = document.getElementById("emailError");
-
-const passwordError = document.getElementById("passwordError");
-
-const togglePassword = document.getElementById("togglePassword");
-
-const createAccountButton = document.getElementById("createAccountButton");
-
-const buttonText = document.getElementById("buttonText");
-
-const loading = document.getElementById("loading");
-
-const successMessage = document.getElementById("successMessage");
-
-const forgotPassword = document.getElementById("forgotPassword");
-
-const signUpLink = document.getElementById("signUpLink");
 
 /* =========================================
-   EMAIL VALIDATION
+   ELEMENTS
 ========================================= */
 
-function validateEmail(email) {
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const signInBox = document.getElementById("signInBox");
 
-  return pattern.test(email);
-}
+const signUpBox = document.getElementById("signUpBox");
+
+const showSignUp = document.getElementById("showSignUp");
+
+const showSignIn = document.getElementById("showSignIn");
+
+const signInForm = document.getElementById("signInForm");
+
+const signUpForm = document.getElementById("signUpForm");
+
+const signInMessage = document.getElementById("signInMessage");
+
+const signUpMessage = document.getElementById("signUpMessage");
 
 /* =========================================
-   PASSWORD VALIDATION
+   SHOW SIGN UP
 ========================================= */
 
-function validatePassword(password) {
-  return password.length >= 6;
-}
+showSignUp.addEventListener("click", function () {
+  signInBox.classList.add("hidden");
 
-/* =========================================
-   SHOW / HIDE PASSWORD
-========================================= */
+  signUpBox.classList.remove("hidden");
 
-togglePassword.addEventListener("click", function () {
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-
-    togglePassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-
-    togglePassword.setAttribute("aria-label", "Hide password");
-  } else {
-    passwordInput.type = "password";
-
-    togglePassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
-
-    togglePassword.setAttribute("aria-label", "Show password");
-  }
+  clearMessages();
 });
 
 /* =========================================
-   CLEAR EMAIL ERROR
+   SHOW SIGN IN
 ========================================= */
 
-emailInput.addEventListener("input", function () {
-  emailError.textContent = "";
+showSignIn.addEventListener("click", function () {
+  signUpBox.classList.add("hidden");
 
-  successMessage.style.display = "none";
-});
+  signInBox.classList.remove("hidden");
 
-/* =========================================
-   CLEAR PASSWORD ERROR
-========================================= */
-
-passwordInput.addEventListener("input", function () {
-  passwordError.textContent = "";
-
-  successMessage.style.display = "none";
-});
-
-/* =========================================
-   LOGIN / CREATE ACCOUNT FORM
-========================================= */
-
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  /* Clear previous */
-
-  emailError.textContent = "";
-
-  passwordError.textContent = "";
-
-  successMessage.style.display = "none";
-
-  /* Get values */
-
-  const email = emailInput.value.trim();
-
-  const password = passwordInput.value.trim();
-
-  let valid = true;
-
-  /* =====================================
-           EMAIL CHECK
-        ====================================== */
-
-  if (email === "") {
-    emailError.textContent = "Please enter your email.";
-
-    valid = false;
-  } else if (!validateEmail(email)) {
-    emailError.textContent = "Please enter a valid email.";
-
-    valid = false;
-  }
-
-  /* =====================================
-           PASSWORD CHECK
-        ====================================== */
-
-  if (password === "") {
-    passwordError.textContent = "Please enter your password.";
-
-    valid = false;
-  } else if (!validatePassword(password)) {
-    passwordError.textContent = "Password must be at least 6 characters.";
-
-    valid = false;
-  }
-
-  /* =====================================
-           STOP
-        ====================================== */
-
-  if (!valid) {
-    return;
-  }
-
-  /* =====================================
-           LOADING
-        ====================================== */
-
-  createAccountButton.disabled = true;
-
-  buttonText.style.display = "none";
-
-  loading.style.display = "inline";
-
-  /* =====================================
-           DEMO PROCESS
-        ====================================== */
-
-  setTimeout(function () {
-    createAccountButton.disabled = false;
-
-    buttonText.style.display = "inline";
-
-    loading.style.display = "none";
-
-    successMessage.textContent = "Account created successfully!";
-
-    successMessage.style.display = "block";
-
-    /* Clear form */
-
-    emailInput.value = "";
-
-    passwordInput.value = "";
-  }, 1500);
-});
-
-/* =========================================
-   FORGOT PASSWORD
-========================================= */
-
-forgotPassword.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  const email = emailInput.value.trim();
-
-  if (email === "") {
-    alert("Please enter your email address first.");
-
-    emailInput.focus();
-
-    return;
-  }
-
-  if (!validateEmail(email)) {
-    alert("Please enter a valid email address.");
-
-    emailInput.focus();
-
-    return;
-  }
-
-  alert("Password reset link will be sent to " + email);
+  clearMessages();
 });
 
 /* =========================================
    SIGN UP
 ========================================= */
 
-signUpLink.addEventListener("click", function (event) {
+signUpForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  alert("Sign Up page will be opened here.");
+  /* Get values */
+
+  const name = document.getElementById("signupName").value.trim();
+
+  const email = document
+    .getElementById("signupEmail")
+    .value.trim()
+    .toLowerCase();
+
+  const password = document.getElementById("signupPassword").value;
+
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  /* =================================
+           VALIDATION
+        ================================= */
+
+  if (password.length < 6) {
+    showMessage(
+      signUpMessage,
+      "Password must be at least 6 characters.",
+      "error",
+    );
+
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    showMessage(signUpMessage, "Passwords do not match.", "error");
+
+    return;
+  }
+
+  /* =================================
+           CHECK EXISTING ACCOUNT
+        ================================= */
+
+  const existingUser = localStorage.getItem("docHouseUser");
+
+  if (existingUser) {
+    const user = JSON.parse(existingUser);
+
+    if (user.email === email) {
+      showMessage(
+        signUpMessage,
+        "An account with this email already exists.",
+        "error",
+      );
+
+      return;
+    }
+  }
+
+  /* =================================
+           CREATE USER
+        ================================= */
+
+  const newUser = {
+    name: name,
+
+    email: email,
+
+    password: password,
+  };
+
+  localStorage.setItem("docHouseUser", JSON.stringify(newUser));
+
+  /* =================================
+           LOGIN STATUS
+        ================================= */
+
+  localStorage.setItem("docHouseLoggedIn", "true");
+
+  localStorage.setItem(
+    "docHouseCurrentUser",
+    JSON.stringify({
+      name: name,
+      email: email,
+    }),
+  );
+
+  /* =================================
+           SUCCESS
+        ================================= */
+
+  showMessage(
+    signUpMessage,
+    "Account created successfully! Redirecting...",
+    "success",
+  );
+
+  /*
+   * Redirect to Dashboard
+   */
+
+  setTimeout(function () {
+    window.location.href = "Dashboard/dashboard.html";
+  }, 800);
 });
+
+/* =========================================
+   SIGN IN
+========================================= */
+
+signInForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  /* Get values */
+
+  const email = document
+    .getElementById("loginEmail")
+    .value.trim()
+    .toLowerCase();
+
+  const password = document.getElementById("loginPassword").value;
+
+  /* =================================
+           GET USER
+        ================================= */
+
+  const savedUser = localStorage.getItem("docHouseUser");
+
+  if (!savedUser) {
+    showMessage(
+      signInMessage,
+      "No account found. Please create an account first.",
+      "error",
+    );
+
+    return;
+  }
+
+  const user = JSON.parse(savedUser);
+
+  /* =================================
+           CHECK LOGIN
+        ================================= */
+
+  if (email !== user.email || password !== user.password) {
+    showMessage(signInMessage, "Invalid email or password.", "error");
+
+    return;
+  }
+
+  /* =================================
+           LOGIN SUCCESS
+        ================================= */
+
+  localStorage.setItem("docHouseLoggedIn", "true");
+
+  localStorage.setItem(
+    "docHouseCurrentUser",
+    JSON.stringify({
+      name: user.name,
+      email: user.email,
+    }),
+  );
+
+  /* =================================
+           REDIRECT
+        ================================= */
+
+  window.location.href = "Dashboard/dashboard.html";
+});
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+const forgotPassword = document.getElementById("forgotPassword");
+
+forgotPassword.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  alert("Password reset system will be added later.");
+});
+
+/* =========================================
+   MESSAGE FUNCTION
+========================================= */
+
+function showMessage(element, message, type) {
+  element.textContent = message;
+
+  element.className = "message " + type;
+}
+
+/* =========================================
+   CLEAR MESSAGE
+========================================= */
+
+function clearMessages() {
+  signInMessage.textContent = "";
+
+  signUpMessage.textContent = "";
+
+  signInMessage.className = "message";
+
+  signUpMessage.className = "message";
+}

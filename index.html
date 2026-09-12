@@ -5,146 +5,183 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sign In - Doc House</title>
+    <title>Doc House - Sign In</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
   </head>
 
   <body>
-    <!-- =====================================
-         MAIN PAGE
-    ====================================== -->
+    <!-- =========================
+         MAIN AUTH CONTAINER
+    ========================== -->
 
-    <main class="login-page">
-      <!-- =================================
-             LEFT / TOP ILLUSTRATION
-        ================================== -->
+    <main class="auth-container">
+      <!-- =========================
+             LEFT SIDE
+        ========================== -->
 
-      <section class="illustration-section">
-        <!-- Background -->
-
-        <img src="./image/Rectangle 1.png" class="background-image" alt="" />
-
-        <!-- Medical Plus Decoration -->
-
-        <img src="./image/Frame.png" class="medical-decoration" alt="" />
-
-        <!-- Doctor + Medicine -->
-
-        <img
-          src="./image/Frame 2.png"
-          class="doctor-image"
-          alt="Doctor illustration"
-        />
+      <section class="auth-image">
+        <img src="image/Frame 2.png" alt="Doctor" />
       </section>
 
-      <!-- =================================
-             LOGIN SECTION
-        ================================== -->
+      <!-- =========================
+             RIGHT SIDE
+        ========================== -->
 
-      <section class="form-section">
-        <div class="login-box">
-          <!-- Heading -->
+      <section class="auth-section">
+        <!-- =====================
+                 SIGN IN
+            ====================== -->
 
-          <h1>
-            Sign In to Doc<br class="mobile-break" />
-            House
-          </h1>
+        <div class="auth-box" id="signInBox">
+          <h1>Welcome Back</h1>
 
-          <!-- FORM -->
+          <p class="subtitle">Sign in to your account</p>
 
-          <form id="loginForm">
-            <!-- =========================
-                         EMAIL
-                    ========================== -->
+          <form id="signInForm">
+            <!-- Email -->
 
-            <div class="form-group">
-              <label for="email"> Username or Email Address </label>
+            <div class="input-group">
+              <label for="loginEmail"> Email </label>
 
               <input
                 type="email"
-                id="email"
-                placeholder="Enter your username or email"
-                autocomplete="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required
               />
-
-              <span id="emailError" class="error-message"></span>
             </div>
 
-            <!-- =========================
-                         PASSWORD
-                    ========================== -->
+            <!-- Password -->
 
-            <div class="form-group">
-              <div class="password-header">
-                <label for="password"> Password </label>
+            <div class="input-group">
+              <label for="loginPassword"> Password </label>
 
-                <a href="#" id="forgotPassword"> Forgot password? </a>
-              </div>
-
-              <div class="password-wrapper">
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Enter your password"
-                  autocomplete="current-password"
-                />
-
-                <button
-                  type="button"
-                  id="togglePassword"
-                  class="password-toggle"
-                  aria-label="Show password"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-              </div>
-
-              <span id="passwordError" class="error-message"></span>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+              />
             </div>
 
-            <!-- =========================
-                         CREATE ACCOUNT BUTTON
-                    ========================== -->
+            <!-- Remember -->
 
-            <button
-              type="submit"
-              id="createAccountButton"
-              class="create-account-button"
-            >
-              <span id="buttonText"> Create Account </span>
+            <div class="form-options">
+              <label class="remember">
+                <input type="checkbox" id="rememberMe" />
 
-              <span id="loading" class="loading">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-              </span>
-            </button>
+                Remember me
+              </label>
 
-            <!-- SUCCESS MESSAGE -->
+              <a href="#" id="forgotPassword"> Forgot password? </a>
+            </div>
 
-            <div id="successMessage" class="success-message"></div>
+            <!-- Sign In Button -->
+
+            <button type="submit" class="auth-button">Sign In</button>
+
+            <!-- Error -->
+
+            <p class="message error" id="signInMessage"></p>
           </form>
 
-          <!-- =========================
-                     REGISTER TEXT
-                ========================== -->
+          <!-- Sign Up -->
 
-          <p class="register-text">
-            Please register at first. Go to
+          <p class="switch-text">
+            Don't have an account?
 
-            <a href="#" id="signUpLink"> SIGN UP </a>
+            <button type="button" id="showSignUp" class="switch-button">
+              Sign Up
+            </button>
+          </p>
+        </div>
+
+        <!-- =====================
+                 SIGN UP
+            ====================== -->
+
+        <div class="auth-box hidden" id="signUpBox">
+          <h1>Create Account</h1>
+
+          <p class="subtitle">Create your Doc House account</p>
+
+          <form id="signUpForm">
+            <!-- Name -->
+
+            <div class="input-group">
+              <label for="signupName"> Full Name </label>
+
+              <input
+                type="text"
+                id="signupName"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+
+            <div class="input-group">
+              <label for="signupEmail"> Email </label>
+
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <!-- Password -->
+
+            <div class="input-group">
+              <label for="signupPassword"> Password </label>
+
+              <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create a password"
+                required
+                minlength="6"
+              />
+            </div>
+
+            <!-- Confirm Password -->
+
+            <div class="input-group">
+              <label for="confirmPassword"> Confirm Password </label>
+
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+                minlength="6"
+              />
+            </div>
+
+            <!-- Sign Up Button -->
+
+            <button type="submit" class="auth-button">Create Account</button>
+
+            <!-- Message -->
+
+            <p class="message" id="signUpMessage"></p>
+          </form>
+
+          <!-- Back to Sign In -->
+
+          <p class="switch-text">
+            Already have an account?
+
+            <button type="button" id="showSignIn" class="switch-button">
+              Sign In
+            </button>
           </p>
         </div>
       </section>
     </main>
-
-    <!-- JavaScript -->
 
     <script src="index.js"></script>
   </body>

@@ -1,4 +1,30 @@
 /* =========================================
+   CHECK LOGIN
+========================================= */
+
+const isLoggedIn = localStorage.getItem("docHouseLoggedIn");
+
+if (isLoggedIn !== "true") {
+  window.location.href = "../index.html";
+}
+
+/* =========================================
+   CURRENT USER
+========================================= */
+
+const currentUser = localStorage.getItem("docHouseCurrentUser");
+
+if (currentUser) {
+  const user = JSON.parse(currentUser);
+
+  const dashboardUserName = document.getElementById("dashboardUserName");
+
+  if (dashboardUserName) {
+    dashboardUserName.textContent = user.name;
+  }
+}
+
+/* =========================================
    GET ELEMENTS
 ========================================= */
 
@@ -68,3 +94,24 @@ chartMenus.forEach(function (button) {
     alert("Chart options will appear here.");
   });
 });
+
+/* =========================================
+   LOGOUT FUNCTION
+========================================= */
+
+function logout() {
+
+    localStorage.removeItem(
+        "docHouseLoggedIn"
+    );
+
+
+    localStorage.removeItem(
+        "docHouseCurrentUser"
+    );
+
+
+    window.location.href =
+        "../index.html";
+
+}
